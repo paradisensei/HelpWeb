@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="0" author="paradise1203">
+        <createTable tableName="request">
+            <column name="id" type="int8"/>
+            <column name="needy_id" type="int8"/>
+            <column name="volunteer_id" type="int8"/>
+            <column name="address" type="varchar(50)"/>
+            <column name="latitude" type="real"/>
+            <column name="longitude" type="real"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="service_type" type="varchar(20)"/>
+            <column name="status" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="paradise1203">
+        <addPrimaryKey tableName="request" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="paradise1203">
+        <createSequence sequenceName="request_seq"
+                        schemaName="public" incrementBy="1" startValue="150"/>
+    </changeSet>
+
+    <changeSet id="3" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="request" baseColumnNames="needy_id"
+                                 constraintName="request_needy_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="request" baseColumnNames="volunteer_id"
+                                 constraintName="request_volunteer_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.aidar.security"/>
+
+    <security:http auto-config="true" use-expressions="true" access-denied-page="/home">
+        <!-- AuthController -->
+        <security:intercept-url pattern="/sign_in" access="isAnonymous()"/>
+        <security:intercept-url pattern="/sign_up" access="isAnonymous()"/>
+        <!-- HomeController -->
+        <security:intercept-url pattern="/" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/home" access="isAuthenticated()"/>
+        <!-- UserController -->
+        <security:intercept-url pattern="/users/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/users/ban" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/users/pardon" access="hasRole('ROLE_ADMIN')"/>
+        <!-- RequestController -->
+        <security:intercept-url pattern="/requests/**" access="isAuthenticated()"/>
+        <!-- CommunityController -->
+        <security:intercept-url pattern="/communities/**" access="isAuthenticated()"/>
+
+        <security:form-login
+                login-page="/sign_in"
+                login-processing-url="/login/process"
+                username-parameter="email"
+                password-parameter="password"
+                default-target-url="/home"
+                always-use-default-target="true"
+                authentication-failure-url="/sign_in?error=true"/>
+        <security:remember-me key="secretToken" token-validity-seconds="36000"/>
+        <security:logout logout-url="/logout" logout-success-url="/sign_in"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider ref="authProviderImpl"/>
+    </security:authentication-manager>
+
+</beans>

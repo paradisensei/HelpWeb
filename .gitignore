@@ -1,0 +1,7 @@
+# project files
+.idea
+*.iml
+
+# properties
+database.properties
+googleapi.properties

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="0" author="paradise1203">
+        <createTable tableName="comment">
+            <column name="id" type="int8"/>
+            <column name="text" type="text"/>
+            <column name="request_id" type="int8"/>
+            <column name="author_id" type="int8"/>
+            <column name="created_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="paradise1203">
+        <addPrimaryKey tableName="comment" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="paradise1203">
+        <createSequence sequenceName="comment_seq"
+                        schemaName="public" incrementBy="1" startValue="150"/>
+    </changeSet>
+
+    <changeSet id="3" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="comment" baseColumnNames="request_id"
+                                 constraintName="comment_request_fk"
+                                 referencedTableName="request"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="comment" baseColumnNames="author_id"
+                                 constraintName="comment_author_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

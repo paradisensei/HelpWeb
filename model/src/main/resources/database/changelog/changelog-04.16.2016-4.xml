@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="0" author="paradise1203">
+        <createTable tableName="user_community">
+            <column name="id" type="int8"/>
+            <column name="user_id" type="int8"/>
+            <column name="community_id" type="int8"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="paradise1203">
+        <addPrimaryKey tableName="user_community" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="paradise1203">
+        <createSequence sequenceName="user_community_seq"
+                        schemaName="public" incrementBy="1" startValue="150"/>
+    </changeSet>
+
+    <changeSet id="3" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="user_community" baseColumnNames="user_id"
+                                 constraintName="user_community_user_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="user_community" baseColumnNames="community_id"
+                                 constraintName="user_community_community_fk"
+                                 referencedTableName="community"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

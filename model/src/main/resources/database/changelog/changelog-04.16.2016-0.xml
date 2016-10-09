@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="0" author="paradise1203">
+        <createTable tableName="message">
+            <column name="id" type="int8"/>
+            <column name="text" type="text"/>
+            <column name="sender_id" type="int8"/>
+            <column name="recipient_id" type="int8"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="status" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="paradise1203">
+        <addPrimaryKey tableName="message" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="paradise1203">
+        <createSequence sequenceName="message_seq"
+                        schemaName="public" incrementBy="1" startValue="150"/>
+    </changeSet>
+
+    <changeSet id="3" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="message" baseColumnNames="sender_id"
+                                 constraintName="message_sender_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4" author="paradise1203">
+        <addForeignKeyConstraint baseTableName="message" baseColumnNames="recipient_id"
+                                 constraintName="message_recipient_fk"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
