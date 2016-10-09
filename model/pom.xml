@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.aidar</groupId>
-        <artifactId>sem1</artifactId>
+        <artifactId>help</artifactId>
         <version>1.0.0</version>
     </parent>
 

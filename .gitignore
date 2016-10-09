@@ -1,6 +1,7 @@
 # project files
 .idea
 *.iml
+target
 
 # properties
 database.properties

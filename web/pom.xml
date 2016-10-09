@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.aidar</groupId>
-        <artifactId>sem1</artifactId>
+        <artifactId>help</artifactId>
         <version>1.0.0</version>
     </parent>
 
@@ -216,7 +216,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.12</version>
+                        <version>2.19.1</version>
                         <executions>
                             <execution>
                                 <id>default</id>
