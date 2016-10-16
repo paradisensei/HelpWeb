@@ -77,7 +77,7 @@
         <profile>
             <id>ddl_migration</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
